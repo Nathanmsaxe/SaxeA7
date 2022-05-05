@@ -14,23 +14,28 @@ Container<Key,T>::Container(){
 
 }
 template<class Key, class T>
-Container<Key,T>::Container(const int num){
-	aptr = new pair<Key, T>[num];
+Container<Key,T>::Container(const int number){
+	aptr = new pair<Key, T>[number];
+	this->allocated_size = number;
 	this->num = 0;
-	this->allocated_size = num;
+
 
 }
 template<class Key, class T>
-bool Container<Key,T>::push_back(Key keytype, T data){
-	try{
-		this->aptr[num] = make_pair(keytype, data);
+int Container<Key,T>::push_back(Key keytype, T data){
+	bool s = true;
+
+	if(num<allocated_size){
+		this->aptr[this->num] = make_pair(keytype, data);
 		this->num++;
 	}
-	catch(bad_alloc&){
-		cout << "ERROR: memory not allocated" << endl;
-		return false;
+	else{
+		cout << "ERROR: Memory not allocated" << endl;
+		string f = "ERROR";
+		throw(f);
+		s = false;
 	}
-	return true;
+	return s;
 }
 template<class Key, class T>
 int Container<Key,T>::size(){
@@ -72,4 +77,3 @@ template<class Key, class T>
 Container<Key,T>::~Container(){
 	delete[] aptr;
 }
-
