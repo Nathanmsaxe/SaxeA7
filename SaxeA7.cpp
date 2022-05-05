@@ -64,10 +64,16 @@ int main() {
 
 	keyValue=666;
 	dataValue="fff";
-	b = c.push_back(keyValue, dataValue);
+	try{
+		b = c.push_back(keyValue, dataValue);
+	}
+	catch(string&){
+		cout << "Successfully threw exception" << endl;
+	}
 	if (!b)
 	{
 		cout << "successfully returned container full" << endl;
 	}
 	return 0;
 }
+
